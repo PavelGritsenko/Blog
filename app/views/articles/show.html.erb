@@ -1,0 +1,11 @@
+<%= link_to "All articles", root_path%>
+
+<h1><%= @articles.title %></h1>
+
+<p><%= @articles.body %></p>
+
+
+<ul>
+  <li><%= link_to "Edit", edit_article_path(@articles) %></li>
+  <li><%= link_to "Destroy", articles_path(@articles), data: {method: :delete, confirm: "Are u shure?"} %></li>
+</ul>
