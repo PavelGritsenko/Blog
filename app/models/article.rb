@@ -1,8 +1,9 @@
 class Article < ApplicationRecord
-    validates :title, presence: true
-    validates :body, presence: true, length: {minimum:5}
+  include Visible  
+  
+  has_many :comments, dependent: :destroy
 
-    def form_created_at
-        self.created_at.strftime('%Y-%m-%d %H:%M:%S')
-    end
+  def form_created_at
+      self.created_at.strftime('%Y-%m-%d %H:%M:%S')
+  end
 end

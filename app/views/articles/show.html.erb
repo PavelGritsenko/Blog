@@ -11,5 +11,11 @@
 
 <div>
   <%= link_to "Edit", edit_article_path(@article) %></li> |
-  <%= link_to "Destroy", @article, data: {turbo_method: :delete, turbo_confirm: "Are u shure?"} %></li>
+  <%= link_to "Delete", @article, data: {turbo_method: :delete, turbo_confirm: "Are u shure?"} %></li>
 </div>
+
+<h2>Comments</h2>
+<%= render @article.comments %>
+
+<h2>Add a comment:</h2>
+<%= render "comments/form"%>
