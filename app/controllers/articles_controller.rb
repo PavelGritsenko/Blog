@@ -1,49 +1,52 @@
 class ArticlesController < ApplicationController
+  before_action :find_article, only: %i[show edit update destroy]
+
   def index
     @articles = Article.all
   end
 
   def show
-    @articles = Article.find(params[:id])
+
   end
 
   def new
-    @articles = Article.new
+    @article = Article.new
   end
 
   def create
-    @articles = Article.new(article_params)
+    @article = Article.new(article_params)
 
-    if @articles.save
-      redirect_to @articles
+    if @article.save
+      redirect_to articles_path
     else 
       render :new, status: :unprocessable_entity
     end
   end
 
   def edit 
-    @articles = Article.find(params[:id])
+    
   end
 
   def update 
-    @articles = Article.find(params[:id])
-
-    if @articles.update(article_params)
-      redirect_to @articles
+    if @article.update(article_params)
+      redirect_to @article
     else 
       render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @articles = Article.find(params[:id])
-    @articles.destroy
+    @article.destroy
     
-    redirect_to @articles
+    redirect_to articles_path, status: :see_other
   end
 
   private
     def article_params
       params.require(:article).permit(:title, :body)
+    end
+
+    def find_article
+      @article = Article.find(params[:id])
     end
 end
