@@ -1,0 +1,33 @@
+# frozen_string_literal: true
+
+module Authentication
+  extend ActiveSupport::Concern
+  included do
+    private
+
+    def current_user
+      @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id].present?
+    end
+
+    def user_signed_in?
+      current_user.present?
+    end
+
+    # валидация что если юзер залогинен у него нет доступа к регистрации
+    def require_no_authentication
+      return unless user_signed_in?
+
+      redirect_to root_path
+    end
+
+    def sign_in(user)
+      session[:user_id] = user.id
+    end
+
+    def sign_out
+      session.delete :user_id
+    end
+
+    helper_method :current_user, :user_signed_in?     # что бы методы были доступны во views делаем их хелперами
+  end
+end

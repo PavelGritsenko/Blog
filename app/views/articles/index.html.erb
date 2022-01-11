@@ -1,5 +1,3 @@
-<%= link_to "New Article", new_article_path%>
-
 <h1>Articles</h1>
 
 Our blog has <%= Article.public_count %> articles and counting!
@@ -8,7 +6,7 @@ Our blog has <%= Article.public_count %> articles and counting!
   <% unless article.archived? %>
     <div>
       <h3><%= link_to article.title, article %></h3>
-      <p><%= article.body %></p>
+      <p><%= strip_tags article.body %></p>
       <%= link_to "Edit", edit_article_path(article) %></li> |
       <%= link_to "Delete", article, data: {turbo_method: :delete, turbo_confirm: "Are u shure?"} %></li>
     </div>
