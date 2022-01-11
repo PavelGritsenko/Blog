@@ -5,10 +5,13 @@ Our blog has <%= Article.public_count %> articles and counting!
 <% @articles.each do |article| %>
   <% unless article.archived? %>
     <div>
-      <h3><%= link_to article.title, article %></h3>
+      <h2><%= link_to article.title, article %></h2>
+      <cite>Author: <%= article.user.name %></cite>
       <p><%= strip_tags article.body %></p>
-      <%= link_to "Edit", edit_article_path(article) %></li> |
-      <%= link_to "Delete", article, data: {turbo_method: :delete, turbo_confirm: "Are u shure?"} %></li>
+      <div>
+      <%= link_to "Edit", edit_article_path(article) %> |
+      <%= link_to "Delete", article, data: {turbo_method: :delete, turbo_confirm: "Are u shure?"} %>
+      </div>
     </div>
   <% end %>
 <% end %>

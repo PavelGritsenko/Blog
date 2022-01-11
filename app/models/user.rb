@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  has_secure_password                                                           # метод защиты пароля, по умолчанию работает с password
+  has_secure_password # метод защиты пароля, по умолчанию работает с password
+
+  has_many :comments, dependent: :destroy
+  has_many :articles, dependent: :destroy
 
   validates :email, presence: true, uniqueness: true, 'valid_email_2/email': true
   validates :name, presence: true, uniqueness: true, length: { minimum: 5 }

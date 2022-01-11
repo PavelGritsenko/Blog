@@ -1,12 +1,10 @@
-<%= link_to "All articles", root_path%>
-
 <h1><%= @article.title %></h1>
-
+<cite>Author: <%= @article.user.name %></cite>
 <p><%= sanitize @article.body %></p>
 
-<time datetime = "<%= @article.form_created_at %>">
+<em><time datetime = "<%= @article.form_created_at %>">
     <%= @article.form_created_at %>
-</time>
+</time></em>
 
 
 <div>
